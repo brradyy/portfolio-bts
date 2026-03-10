@@ -14,14 +14,14 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <span className="font-extrabold text-2xl text-blue-600 tracking-tight">Portfolio</span>
           {/* Remplace ton <nav> actuel par celui-ci */}
-          <nav className="hidden md:flex space-x-8 font-semibold text-sm text-gray-600">
-            <a href="#a-propos" className="hover:text-blue-600 transition">À propos</a>
-            <a href="#bts-sio" className="hover:text-blue-600 transition">BTS SIO</a>
-            <a href="#stage" className="hover:text-blue-600 transition">Stage</a>
-            <a href="#competences" className="hover:text-blue-600 transition">Compétences</a> {/* Ajouté */}
-            <Link href="/projets" className="hover:text-blue-600 transition">Réalisations</Link>
-            <a href="#veille" className="hover:text-blue-600 transition">Veille Technologique</a>
-          </nav>
+        <nav className="hidden md:flex space-x-8 font-semibold text-sm text-gray-600 items-center">
+          <a href="#a-propos" className="hover:text-blue-600 transition">À propos</a>
+          <a href="#bts-sio" className="hover:text-blue-600 transition">BTS SIO</a>
+          <a href="#stage" className="hover:text-blue-600 transition">Stage</a>
+          <a href="#competences" className="hover:text-blue-600 transition">Compétences</a>
+          <Link href="/projets" className="hover:text-blue-600 transition">Réalisations</Link>
+          <a href="#veille" className="hover:text-blue-600 transition">Veille Technologique</a>
+        </nav>
         </div>
       </header>
 
@@ -69,6 +69,14 @@ export default function Home() {
               Voir mes projets
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
+
+            {/* Nouveau bouton CV discret */}
+            <a 
+              href="#" 
+              className="flex items-center justify-center gap-2 px-6 py-4 border border-gray-300 rounded-xl font-bold text-gray-600 hover:bg-gray-100 transition shadow-sm"
+            >
+              📄 Mon CV
+            </a>
           </div>
 
           {/* Petit indicateur de défilement */}
@@ -366,39 +374,58 @@ export default function Home() {
         </section>
 
   {/* SECTION CONTACT (POUR FINIR PRO) */}
-  <section id="contact" className="py-20 border-t border-gray-900">
-    <div className="max-w-4xl mx-auto px-6 text-center">
-      <h2 className="text-3xl font-bold mb-8">On travaille ensemble ?</h2>
-      <p className="text-gray-400 mb-10">
-        Actuellement à la recherche d'opportunités en alternance ou en stage. 
-        N'hésitez pas à me contacter pour discuter de vos projets !
-      </p>
-      
+        <section id="contact" className="py-20 border-t border-gray-900">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold mb-6">On travaille ensemble ?</h2>
+            <p className="text-gray-400 mb-10 max-w-2xl mx-auto">
+              Passionné par le développement et toujours prêt pour de nouveaux défis techniques. 
+              <span className="block mt-2 text-blue-400 font-medium">
+                Explorez mon code sur GitHub ou rejoignez-moi sur LinkedIn pour échanger sur mon parcours !
+              </span>
+            </p>
+            
       <div className="flex flex-wrap justify-center gap-6">
-        <a href="mailto:ton.email@exemple.com" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 shadow-lg shadow-blue-900/20">
+        {/* Bouton Email */}
+        <a 
+          href="mailto:TON_EMAIL@exemple.com" 
+          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 shadow-lg shadow-blue-900/20"
+        >
           Me contacter par mail
         </a>
+        
         <div className="flex gap-4">
-          <a href="#" className="w-12 h-12 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center hover:border-blue-500 transition-colors text-xl">
+          {/* Lien LinkedIn */}
+          <a 
+            href="https://www.linkedin.com/in/TON_NOM_UTILISATEUR" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-12 h-12 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center hover:border-blue-500 transition-colors text-xl"
+          >
             in
           </a>
-          <a href="#" className="w-12 h-12 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center hover:border-blue-500 transition-colors text-xl">
+          {/* Lien GitHub */}
+          <a 
+            href="https://github.com/brradyy" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-12 h-12 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center hover:border-blue-500 transition-colors text-xl"
+          >
             git
           </a>
         </div>
       </div>
-    </div>
-  </section>
+          </div>
+        </section>
 
   {/* FOOTER HARMONISÉ */}
-  <footer className="py-12 text-center border-t border-gray-900">
-    <div className="max-w-6xl mx-auto px-6">
-      <p className="text-gray-600 text-[10px] uppercase tracking-[0.2em] font-bold">
-        © {new Date().getFullYear()} — TROH MELVYN — PORTFOLIO BTS SIO SLAM
-      </p>
-    </div>
-  </footer>
-</div>
+        <footer className="py-12 text-center border-t border-gray-900">
+          <div className="max-w-6xl mx-auto px-6">
+            <p className="text-gray-600 text-[10px] uppercase tracking-[0.2em] font-bold">
+              © {new Date().getFullYear()} — TROH MELVYN — PORTFOLIO BTS SIO SLAM
+            </p>
+          </div>
+        </footer>
+      </div>
 
 
 
