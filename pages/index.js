@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
@@ -87,20 +88,44 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section À propos */}
-        <section id="a-propos" className="bg-white py-24 border-t border-gray-100 scroll-mt-20">
-          <div className="max-w-3xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 uppercase tracking-wider text-sm text-blue-600">À propos de moi</h2>
-            <div className="text-lg text-gray-600 leading-relaxed space-y-6">
-              <p>
-                Je m'appelle <strong>Troh Melvyn</strong> et j'ai 19 ans. Je suis actuellement étudiant en première année de <strong>BTS SIO</strong> (Services Informatiques aux Organisations), spécialité <strong>SLAM</strong> (Solutions Logicielles et Applications Métiers) à l'école <strong>ENSITECH</strong>.
-              </p>
-              <p>
-                Passionné par les nouvelles technologies et la programmation, mon objectif principal est de construire une carrière solide dans le domaine de l'ingénierie logicielle. J'aime apprendre, relever des défis techniques et concevoir des solutions innovantes.
-              </p>
-            </div>
-          </div>
-        </section>
+  {/* Section À propos dynamisée */}
+  <motion.section 
+    id="a-propos" 
+    initial={{ opacity: 0, y: 50 }} // Commence invisible et 50px plus bas
+    whileInView={{ opacity: 1, y: 0 }} // Devient visible et remonte à sa place
+    viewport={{ once: true, margin: "-100px" }} // Déclenche l'animation une seule fois
+    transition={{ duration: 0.8, ease: "easeOut" }} // Animation fluide de 0.8 seconde
+    className="bg-white py-24 border-t border-gray-100 scroll-mt-20"
+  >
+    <div className="max-w-3xl mx-auto px-6 text-center">
+      <motion.h2 
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="text-3xl font-bold text-gray-900 mb-8 uppercase tracking-wider text-sm text-blue-600"
+      >
+        À propos de moi
+      </motion.h2>
+      
+      <div className="text-lg text-gray-600 leading-relaxed space-y-6">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          Je m'appelle <strong>Troh Melvyn</strong> et j'ai 19 ans. Je suis actuellement étudiant en première année de <strong>BTS SIO</strong> (Services Informatiques aux Organisations), spécialité <strong>SLAM</strong> (Solutions Logicielles et Applications Métiers) à l'école <strong>ENSITECH</strong>.
+        </motion.p>
+        
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+        >
+          Passionné par les nouvelles technologies et la programmation, mon objectif principal est de construire une carrière solide dans le domaine de l'ingénierie logicielle. J'aime apprendre, relever des défis techniques et concevoir des solutions innovantes.
+        </motion.p>
+      </div>
+    </div>
+  </motion.section>
 
         {/* Zones d'attente pour les prochaines sections */}
 <section id="bts-sio" className="py-24 bg-gray-50 border-t border-gray-100 scroll-mt-20">
@@ -396,7 +421,7 @@ export default function Home() {
         <div className="flex gap-4">
           {/* Lien LinkedIn */}
           <a 
-            href="https://www.linkedin.com/in/TON_NOM_UTILISATEUR" 
+            href="https://www.linkedin.com/in/melvyn-troh-633439327/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="w-12 h-12 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center hover:border-blue-500 transition-colors text-xl"
@@ -426,10 +451,6 @@ export default function Home() {
           </div>
         </footer>
       </div>
-
-
-
-        
       </main>
     </div>
   );
