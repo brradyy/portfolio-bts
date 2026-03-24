@@ -73,13 +73,15 @@ export default function Home() {
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
 
-            {/* Nouveau bouton CV discret */}
-            <a 
-              href="#" 
-              className="flex items-center justify-center gap-2 px-6 py-4 border border-gray-300 rounded-xl font-bold text-gray-600 hover:bg-gray-100 transition shadow-sm"
-            >
-              📄 Mon CV
-            </a>
+          {/* Bouton CV mis à jour */}
+          <a 
+            href="/template__ensup (1).pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 px-6 py-4 border border-gray-300 rounded-xl font-bold text-gray-600 hover:bg-gray-100 transition shadow-sm"
+          >
+            📄 Mon CV
+          </a>
           </div>
 
           {/* Petit indicateur de défilement */}
