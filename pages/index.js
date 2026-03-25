@@ -1,11 +1,29 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import Section from '../components/Section';
 import BentoCard from '../components/BentoCard';
 import ExperienceCard from '../components/ExperienceCard';
 
 export default function Home() {
+  // --- Gestion des articles de veille ---
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/veille')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.error) {
+          setArticles(data);
+        }
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+  // ------------------------------------------------
+  
   return (
     // Fond global sombre et texte clair adaptatif
     <div className="min-h-screen bg-gray-950 text-gray-300 font-sans selection:bg-blue-500/30">
@@ -310,13 +328,13 @@ export default function Home() {
           </div>
         </Section>
 
-{/* --- ZONE FINALE SOMBRE AVEC NUANCE HIGH-TECH --- */}
+        {/* --- ZONE FINALE SOMBRE AVEC NUANCE HIGH-TECH --- */}
         <div className="relative bg-gray-950 text-white transition-colors duration-500 border-t border-gray-800 overflow-hidden">
           
           {/* LA NUANCE : Un grand halo flouté en arrière-plan qui donne de la profondeur */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[600px] bg-gradient-to-b from-blue-900/20 via-cyan-900/10 to-transparent blur-[120px] rounded-full pointer-events-none z-0"></div>
           
-          {/* SECTION VEILLE */}
+          {/* SECTION VEILLE RÉORGANISÉE */}
           <Section id="veille" className="relative py-24 bg-transparent text-white scroll-mt-20 z-10">
             <div className="max-w-6xl mx-auto px-6">
               
@@ -324,38 +342,56 @@ export default function Home() {
                 <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-6 inline-block pb-2">
                   Veille Technologique
                 </h2>
-                <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                  Suivi de l'évolution de <span className="text-blue-400 font-bold">l'Intelligence Artificielle dans le secteur automobile</span> : des systèmes d'aide à la conduite jusqu'à l'autonomie complète.
+              </div>
+
+              {/* 1. DÉFINITION DE LA VEILLE EN BTS SIO */}
+              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 mb-16 shadow-lg">
+                <h3 className="text-2xl font-bold mb-4 text-blue-400 flex items-center gap-3">
+                  <span>💡</span> Qu'est-ce que la veille technologique en BTS SIO ?
+                </h3>
+                <p className="text-gray-300 leading-relaxed text-lg">
+                  La veille technologique est une démarche proactive qui consiste à s'informer en continu sur les innovations, les nouvelles technologies et les tendances du marché informatique. Dans le cadre du BTS SIO, elle est essentielle pour maintenir ses compétences à jour, anticiper les évolutions du secteur et enrichir sa culture numérique face à un domaine en constante mutation.
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8 mb-16">
-                <div className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 hover:bg-gray-800 transition-all group shadow-xl">
-                  <div className="text-3xl mb-4 group-hover:scale-110 transition-transform inline-block">🤖</div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-100">Conduite Autonome</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Analyse des algorithmes de Computer Vision et du Deep Learning permettant aux véhicules de percevoir leur environnement via des capteurs LiDAR et caméras.
+              {/* 2. LE THÈME ET LES 3 AXES */}
+              <div className="mb-16">
+                <div className="text-center mb-10">
+                  <h3 className="text-2xl font-bold text-white mb-4">Mon Thème : L'IA dans l'Automobile</h3>
+                  <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                    Suivi de l'évolution de <span className="text-blue-400 font-bold">l'Intelligence Artificielle dans le secteur automobile</span> : des systèmes d'aide à la conduite jusqu'à l'autonomie complète.
                   </p>
                 </div>
 
-                <div className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-cyan-500/50 hover:bg-gray-800 transition-all group shadow-xl">
-                  <div className="text-3xl mb-4 group-hover:scale-110 transition-transform inline-block">🛠️</div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-100">Maintenance Prédictive</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Utilisation du Machine Learning pour anticiper les pannes mécaniques avant qu'elles ne surviennent en analysant les données des capteurs en temps réel.
-                  </p>
-                </div>
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-cyan-500/50 hover:bg-gray-800 transition-all group shadow-xl">
+                    <div className="text-3xl mb-4 group-hover:scale-110 transition-transform inline-block">🤖</div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-100">Conduite Autonome</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Analyse des algorithmes de Computer Vision et du Deep Learning permettant aux véhicules de percevoir leur environnement via des capteurs LiDAR et caméras.
+                    </p>
+                  </div>
 
-                <div className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-indigo-500/50 hover:bg-gray-800 transition-all group shadow-xl">
-                  <div className="text-3xl mb-4 group-hover:scale-110 transition-transform inline-block">🧠</div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-100">Expérience Utilisateur</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    IA embarquée pour la reconnaissance vocale avancée, la détection de somnolence du conducteur et la personnalisation des trajets (Smart Cockpit).
-                  </p>
+                  <div className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 hover:bg-gray-800 transition-all group shadow-xl">
+                    <div className="text-3xl mb-4 group-hover:scale-110 transition-transform inline-block">🛠️</div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-100">Maintenance Prédictive</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Utilisation du Machine Learning pour anticiper les pannes mécaniques avant qu'elles ne surviennent en analysant les données des capteurs en temps réel.
+                    </p>
+                  </div>
+
+                  <div className="bg-gray-900/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-indigo-500/50 hover:bg-gray-800 transition-all group shadow-xl">
+                    <div className="text-3xl mb-4 group-hover:scale-110 transition-transform inline-block">🧠</div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-100">Expérience Utilisateur</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      IA embarquée pour la reconnaissance vocale avancée, la détection de somnolence du conducteur et la personnalisation des trajets (Smart Cockpit).
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-blue-900/10 border border-blue-500/20 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+              {/* 3. LA MÉTHODOLOGIE DE RECHERCHE */}
+              <div className="bg-blue-900/10 border border-blue-500/20 backdrop-blur-sm rounded-2xl p-8 shadow-2xl mb-16">
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 text-gray-100">
@@ -378,6 +414,49 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+
+              {/* 4. ARTICLES EN TEMPS RÉEL (Connecté à l'API) */}
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                  </span>
+                  <h3 className="text-xl font-bold text-white uppercase tracking-wider text-sm">Derniers articles captés (Live)</h3>
+                </div>
+
+                {loading ? (
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {[1, 2, 3].map(i => (
+                      <div key={i} className="bg-gray-900/50 p-6 rounded-xl border border-gray-800 animate-pulse h-40"></div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {articles.map((article, index) => (
+                      <a 
+                        key={index} 
+                        href={article.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl border border-gray-700/50 hover:border-blue-500/50 hover:-translate-y-2 transition-all group shadow-lg flex flex-col justify-between"
+                      >
+                        <div>
+                          <p className="text-blue-400 text-xs font-bold mb-3">{article.date}</p>
+                          <h4 className="text-gray-100 font-bold mb-3 line-clamp-3 group-hover:text-blue-300 transition-colors">
+                            {article.title.split(' - ')[0]}
+                          </h4>
+                        </div>
+                        <div className="mt-4 flex items-center justify-between border-t border-gray-800 pt-4">
+                          <span className="text-xs text-gray-500">Source : {article.title.split(' - ').pop()}</span>
+                          <span className="text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
             </div>
           </Section>
 
